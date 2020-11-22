@@ -3,28 +3,41 @@ services:
   nginx:
     build:
       context: ./
-      dockerfile: config/nginx/nginx.docker
+      dockerfile: docker/nginx/nginx.docker
     volumes:
       - ./wordpress:/var/www/
-      - ./logs/nginx:/var/log/nginx:cached
+      - ./docker/nginx/logs:/var/log/nginx:cached
     ports:
       - "8000:80"
     links:
-      - phpfpm
-  phpfpm:
+      - php-fpm
+  php-fpm:
     build:
       context: ./
-      dockerfile: config/php-fpm/php-fpm.docker
+      dockerfile: docker/php-fpm/php-fpm.docker
     volumes:
-      - ./wordpress:/var/www/
-    depends_on:
+      - ./wordpress/:/var/www
+    links:
       - mysql
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=mysql"
+  php-cli:
+    build:
+      context: ./
+      dockerfile: docker/php-cli/php-cli.docker
+    volumes:
+      - ./wordpress/:/var/www
+    links:
+      - mysql
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql"
+    tty: true
   mysql:
     image: mysql:5.7
     volumes:
+      #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
       - "./storage/docker/mysql:/var/lib/mysql:delegated"
     ports:
       - "33061:3306"
