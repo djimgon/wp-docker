@@ -1,0 +1,10 @@
+2020/11/02 17:11:20 [emerg] 1#1: SSL_CTX_use_certificate("/etc/nginx/certs/localhost.crt") failed (SSL: error:140AB18F:SSL routines:SSL_CTX_use_certificate:ee key too small)
+2020/11/02 17:13:16 [emerg] 1#1: SSL_CTX_use_certificate("/etc/nginx/certs/localhost.crt") failed (SSL: error:140AB18F:SSL routines:SSL_CTX_use_certificate:ee key too small)
+2020/11/02 17:16:22 [emerg] 1#1: SSL_CTX_use_certificate("/etc/nginx/certs/localhost.crt") failed (SSL: error:140AB18F:SSL routines:SSL_CTX_use_certificate:ee key too small)
+2020/11/02 17:19:50 [emerg] 1#1: SSL_CTX_use_certificate("/etc/nginx/certs/localhost.crt") failed (SSL: error:140AB18F:SSL routines:SSL_CTX_use_certificate:ee key too small)
+2020/11/02 17:20:32 [emerg] 1#1: SSL_CTX_use_certificate("/etc/nginx/certs/localhost.crt") failed (SSL: error:140AB18F:SSL routines:SSL_CTX_use_certificate:ee key too small)
+2020/11/02 17:26:38 [error] 28#28: *1 directory index of "/var/www/html/" is forbidden, client: 172.31.0.1, server: localhost, request: "GET / HTTP/1.1", host: "127.0.0.1:8000"
+2020/11/02 17:26:45 [error] 28#28: *1 directory index of "/var/www/html/" is forbidden, client: 172.31.0.1, server: localhost, request: "GET / HTTP/1.1", host: "127.0.0.1:8000"
+2020/11/02 17:29:19 [error] 28#28: *2 directory index of "/var/www/html/" is forbidden, client: 172.31.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8000"
+2020/11/02 17:29:24 [error] 28#28: *3 directory index of "/var/www/html/" is forbidden, client: 172.31.0.1, server: localhost, request: "GET / HTTP/1.1", host: "localhost:8000"
+2020/11/03 15:42:58 [alert] 1#1: worker process 27 exited on signal 9
