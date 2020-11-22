@@ -1,2 +1,3 @@
-!wordpress
-!vendor
+wordpress
+vendor
+.idea
