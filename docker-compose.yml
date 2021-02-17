@@ -1,72 +1,35 @@
-version: '3'
+version: '2'
 services:
-  mysql:
-    image: mysql:5
-    container_name: info-guru-db
+  nginx:
+    build:
+      context: ./
+      dockerfile: config/nginx/nginx.docker
     volumes:
-      - "./data/db:/var/lib/mysql"
-      #- "./data/db:/var/lib/mysql:delegated"
-      #- "./data.sql:/docker-entrypoint-initdb.d/data.sql"
+      - ./wordpress:/var/www/
+      - ./logs/nginx:/var/log/nginx:cached
     ports:
-      - "3306:3306"
+      - "8000:80"
+    links:
+      - phpfpm
+  phpfpm:
+    build:
+      context: ./
+      dockerfile: config/php-fpm/php-fpm.docker
+    volumes:
+      - ./wordpress:/var/www/
+    depends_on:
+      - mysql
+    environment:
+      - "DB_PORT=3306"
+      - "DB_HOST=mysql"
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - "./storage/docker/mysql:/var/lib/mysql:delegated"
+    ports:
+      - "33061:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: password
-  mailcatcher:
-     image: schickling/mailcatcher
-     ports:
-       - "1025:1025"
-       - "1080:1080"
-     environment:
-       MAILCATCHER_PORT: 1025
-  memcached:
-    image: memcached:latest
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.5
-    environment:
-      ES_JAVA_OPTS: "-Xms750m -Xmx750m"
-    ports:
-      - "9200:9200"
-    volumes:
-      - "./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:cached"
-      - "./config/elasticsearch/plugins:/usr/share/elasticsearch/plugins:cached"
-      - "./data/elasticsearch:/usr/share/elasticsearch/data:delegated"
-  phpfpm:
-    image: 10up/phpfpm
-    container_name: info-guru-php-cli
-    depends_on:
-      - mysql
-      - memcached
-      - elasticsearch
-    volumes:
-      - "./wordpress:/var/www/html:cached"
-      - "./config/php-fpm/php.ini:/usr/local/etc/php/php.ini:cached"
-      - "./config/php-fpm/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:cached"
-      - "./config/php-fpm/wp-cli.local.yml:/var/www/html/wp-cli.local.yml:cached"
-      - "~/.ssh:/root/.ssh:cached"
-    extra_hosts:
-      - "docker-local.localhost:172.18.0.1"
-    environment:
-      PHP_IDE_CONFIG: "serverName=PhpServerBase"
-  nginx:
-    depends_on:
-      - phpfpm
-    ports:
-      - "8000:80"
-      - "443:443"
-    image: nginx:latest
-    volumes:
-      - "./wordpress:/var/www/html:cached"
-      - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:cached"
-      - "./config/certs:/etc/nginx/certs:cached"
-      - "./logs/nginx:/var/log/nginx:cached"
-  wpsnapshots:
-    image: 10up/wpsnapshots
-    depends_on:
-      - mysql
-      - phpfpm
-    volumes:
-      - "./wordpress:/var/www/html:cached"
-      - "./config/wpsnapshots:/home/wpsnapshots/.wpsnapshots:cached"

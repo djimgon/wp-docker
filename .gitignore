@@ -2,3 +2,5 @@ wordpress
 vendor
 .idea
 data
+logs
+storage
