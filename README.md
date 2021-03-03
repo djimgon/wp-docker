@@ -10,9 +10,9 @@
 
  * mysql:
  *   image: mysql:5.7
- *   volumes:
- *     - "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
- *     - "./storage/docker/mysql:/var/lib/mysql:delegated"
+ *    volumes:
+      - "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
+      - "./storage/docker/mysql:/var/lib/mysql:delegated"
 
 В следующий раз когда делаем docker-compose up не забываем заккоментировать эту строку или удалить, а то база постоянно будет импортироваться при каждому запуске
  * #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
