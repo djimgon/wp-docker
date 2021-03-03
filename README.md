@@ -22,19 +22,19 @@
 
 * define( 'DB_NAME', 'wordpress' );
 
-/** MySQL database username */
+* /** MySQL database username */
 * define( 'DB_USER', 'wordpress' );
 
-/** MySQL database password */
+* /** MySQL database password */
 * define( 'DB_PASSWORD', 'password' );
 
-/** MySQL hostname */
+* /** MySQL hostname */
 * define( 'DB_HOST', 'mysql' );
 
-/** Database Charset to use in creating database tables. */
+* /** Database Charset to use in creating database tables. */
 * define( 'DB_CHARSET', 'utf8' );
 
-/** The Database Collate type. Don't change this if in doubt. */
+* /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );  
   
 Далее наслаждаемся работой связки Docker + Wordpress
