@@ -15,7 +15,7 @@
       - "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
       - "./storage/docker/mysql:/var/lib/mysql:delegated"
 
-В следующий раз когда делаем docker-compose up не забываем заккоментировать эту строку или удалить, а то база постоянно будет импортироваться при каждому запуске
+В следующий раз когда делаем docker-compose up не забываем заккоментировать эту строку или удалить, а то база постоянно будет импортироваться при каждом запуске
  * #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
   
   
