@@ -4,3 +4,4 @@ vendor
 data
 logs
 storage
+composer.lock
