@@ -1,29 +1,21 @@
-# README #
+# Инструкция #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Небольшой туториал как работать с этой "кораблем"
 
-### What is this repository for? ###
+* Для начала клонируем данный проект
+* Затем устанавливаем зависимости, подгружаем Wordpress - composer install
+* Импортируем при первом запуске sql (не забываем, что его данные нужно поменять на наши новые) 
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+# Импорт БД в Docker контейнер #
 
-### How do I get set up? ###
+ mysql:
+    image: mysql:5.7
+    volumes:
+      - "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
+      - "./storage/docker/mysql:/var/lib/mysql:delegated"
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+В следующий раз когда делаем docker-compose up не забываем заккоментировать эту строку или удалить, а то база постоянно будет импортироваться при каждому запуске
+  #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
+  
+  
+Далее наслаждаемся работой связки Docker + Wordpress
