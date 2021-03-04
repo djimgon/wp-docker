@@ -93,17 +93,17 @@ services:
 
 3. Внесите в файл php.ini следующие настройки:
 
-[xdebug]
-zend_extension=xdebug.so
-xdebug.profiler_enable=1
-xdebug.remote_enable=1
-xdebug.remote_handler=dbgp
-xdebug.remote_mode=req
-xdebug.remote_host=host.docker.internal
-xdebug.remote_port=9000
-xdebug.remote_autostart=1
-xdebug.remote_connect_back=1
-xdebug.idekey=PHPSTORM
+*[xdebug]
+*zend_extension=xdebug.so
+*xdebug.profiler_enable=1
+*xdebug.remote_enable=1
+*xdebug.remote_handler=dbgp
+*xdebug.remote_mode=req
+*xdebug.remote_host=host.docker.internal
+*xdebug.remote_port=9000
+*xdebug.remote_autostart=1
+*xdebug.remote_connect_back=1
+*xdebug.idekey=PHPSTORM
 
 
 4. Настройте сервер в PhpStorm:
