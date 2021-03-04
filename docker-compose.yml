@@ -17,6 +17,7 @@ services:
       dockerfile: docker/php-fpm/php-fpm.docker
     volumes:
       - ./wordpress/:/var/www
+      - ./docker/php-fpm/php.ini:/usr/local/etc/php/php.ini
     links:
       - mysql
     environment:
@@ -37,7 +38,6 @@ services:
   mysql:
     image: mysql:5.7
     volumes:
-      #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
       - "./storage/docker/mysql:/var/lib/mysql:delegated"
     ports:
       - "33061:3306"
