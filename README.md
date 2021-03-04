@@ -51,7 +51,7 @@ https://habr.com/ru/company/otus/blog/507982/
 Исходные файлы можно найти здесь:
 github.com/ikknd/docker-study в папке recipe-09
 
-1. Создайте файл «Dockerfile» в папке «docker»:
+# 1. Создайте файл «Dockerfile» в папке «docker»: #
 
 FROM php:7.2-fpm
 
@@ -66,7 +66,7 @@ CMD ["php-fpm"]
 docker build -t php-xdebug-custom -f Dockerfile .
 
 
-2. Создайте файл docker-compose.yml в папке «docker»:
+# 2. Создайте файл docker-compose.yml в папке «docker»: #
 
 version: "3.7"
 
@@ -91,7 +91,7 @@ services:
 
 Здесь я использую образ «php-xdebug-custom» вместо «php:7.2-fpm „
 
-3. Внесите в файл php.ini следующие настройки:
+# 3. Внесите в файл php.ini следующие настройки: #
 
 * [xdebug]
 * zend_extension=xdebug.so
@@ -106,7 +106,7 @@ services:
 * xdebug.idekey=PHPSTORM
 
 
-4. Настройте сервер в PhpStorm:
+# 4. Настройте сервер в PhpStorm: #
 
 File -> Settings -> Languages и Frameworks -> PHP -> Servers
 Добавьте новый сервер с помощью иконки + и настройте его, как показано на следующем скриншоте:
@@ -114,17 +114,17 @@ File -> Settings -> Languages и Frameworks -> PHP -> Servers
 
 Убедитесь, что вы отметили «Использовать сопоставление путей» (“Use path mappings») и сопоставили папку php с /var/www/myapp.
 
-5. Настройте удаленный дебагер PHP в PhpStorm:
+# 5. Настройте удаленный дебагер PHP в PhpStorm: #
 
 Run -> Edit configurations -> PHP Remote Debug
 
 Добавьте новую конфигурацию и присвойте ей значения, как на следующем скриншоте:
 
 
-6. Выберите конфигурацию дебага на панели дебага PhpStorm
+# 6. Выберите конфигурацию дебага на панели дебага PhpStorm #
 
 
-7. Перейдите в /var/www/docker-study.loc/recipe-09/docker/ и выполните:
+# 7. Перейдите в /var/www/docker-study.loc/recipe-09/docker/ и выполните: #
 
 docker-compose up -d
 
