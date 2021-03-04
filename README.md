@@ -38,3 +38,6 @@
 define( 'DB_COLLATE', '' );  
   
 Далее наслаждаемся работой связки Docker + Wordpress
+
+# Подключение xdebug к phpstorm #
+https://habr.com/ru/company/otus/blog/507982/
