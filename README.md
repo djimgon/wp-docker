@@ -17,7 +17,42 @@
 
 В следующий раз когда делаем docker-compose up не забываем заккоментировать эту строку или удалить, а то база постоянно будет импортироваться при каждом запуске
  * #- "./storage/docker/backups/dump.sql:/docker-entrypoint-initdb.d/dump.sql"
-  
+
+# Описание запросов SQL #
+
+Вообще основных запросов три (на скриншоте есть и четвертый запрос, но о нем чуть позже). Итак, http://test.truemisha.ru — старый домен, https://misha.agency — новый.
+
+Замена site_url и home_url
+
+* UPDATE wp_options SET option_value = REPLACE(option_value, 'http://test.truemisha.ru', 'https://misha.agency') WHERE option_name = 'home' OR option_name = 'siteurl';
+
+Поиск и замена в содержимом постов
+
+* UPDATE wp_posts SET post_content = REPLACE (post_content, 'http://test.truemisha.ru', 'https://misha.agency');
+
+Значения произвольных полей постов
+
+* UPDATE wp_postmeta SET meta_value = REPLACE (meta_value, 'http://test.truemisha.ru','https://misha.agency');
+
+Для чего нужны guid?
+
+Используются для RSS как глобальный идентификатор (больше кстати не используются нигде).
+
+Если вы переносите сайт с локального сервера — меняем все значения guid: 
+
+* UPDATE wp_posts SET guid = REPLACE (guid, 'http://10.0.0.32', 'https://misha.agency');
+
+Если же сайт уже находился в интернете, а вы просто решили поменять домен — меняем guid только для вложений: 
+
+* UPDATE wp_posts SET guid = REPLACE (guid, 'http://test.truemisha.ru', 'https://misha.agency') WHERE post_type = 'attachment';
+
+Ссылки в комментариях
+
+* UPDATE wp_comments SET comment_content = REPLACE (comment_content, 'http://test.truemisha.ru', 'https://misha.agency');
+* UPDATE wp_comments SET comment_author_url = REPLACE (comment_author_url, 'http://test.truemisha.ru', 'https://misha.agency');
+
+Данный метод взаимствовал у Мишы Рудастых - https://misha.agency/wordpress/sql-queries-domain.html
+
 # Подключаемся к нашей БД через wp-config #
 
 * define( 'DB_NAME', 'wordpress' );
