@@ -12,6 +12,13 @@
 * chmod 777 -R storage
 * sudo chown -R goohunter:www-data top-eng
 
+# Устранение ошибки “enter your FTP credentials” в WordPress #
+
+
+Откройте wp-config.php и добавьте либо измените текущие значения следующего параметра в конце файла:
+define('FS_METHOD', "direct");
+
+
 # Импорт БД в Docker контейнер #
 
  * mysql:
